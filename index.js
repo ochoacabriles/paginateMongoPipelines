@@ -2,7 +2,7 @@ const pipelinePagination = ({ page = 1, pageSize = 100, sortBy = '_id', order = 
   const orderToUse = order !== 1 && order !== -1 ? 1 : order;
   const pageSizeToUse = pageSize % 1 === 0 ? pageSize : 100;
   const pageToUse = page % 1 === 0 ? page : 1;
-  [
+  return [
     // Sort by _id
     {
       $sort: { [sortBy]: orderToUse }
