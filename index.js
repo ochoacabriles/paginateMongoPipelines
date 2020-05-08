@@ -1,8 +1,11 @@
-const pipelinePagination = ({ page = 1, pageSize = 100, sortBy = '_id', order = 1 }) => {
+const pipelinePagination = ({ pipeline, page = 1, pageSize = 100, sortBy = '_id', order = 1 }) => {
+  if (!pipeline) {
+    throw new Error('pipelineIsRequired');
+  }
   const orderToUse = order !== 1 && order !== -1 ? 1 : order;
   const pageSizeToUse = pageSize % 1 === 0 ? pageSize : 100;
   const pageToUse = page % 1 === 0 ? page : 1;
-  return [
+  return pipeline.concat([
     // Sort by _id
     {
       $sort: { [sortBy]: orderToUse }
@@ -23,7 +26,7 @@ const pipelinePagination = ({ page = 1, pageSize = 100, sortBy = '_id', order = 
         results: { $slice: ['$results', pageSizeToUse * (pageToUse - 1), pageSizeToUse] }
       }
     }
-  ];
+  ]);
 }
 
 module.exports = pipelinePagination;
