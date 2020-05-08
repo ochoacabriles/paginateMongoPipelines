@@ -1,6 +1,6 @@
 {
   "name": "paginate-mongo-pipelines",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Tool to generate final stages to paginate results of mongoDB pipelines",
   "main": "index.js",
   "repository": {
